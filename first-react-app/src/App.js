@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import MyComponent from "./MyComponent";
 import styles from "./App.module.css";
+import { Title } from "./Title";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       </div>
 
       <MyComponent />
+
+      <Title>Lorem, ipsum dolor.</Title>
+      <Title theme="dark">Lorem, ipsum dolor.</Title>
     </>
   );
 }
