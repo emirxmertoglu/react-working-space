@@ -2,6 +2,8 @@ import logo from "./logo.svg";
 import MyComponent from "./MyComponent";
 import styles from "./App.module.css";
 import { Title } from "./Title";
+import MyNav from "./MyNav";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
 
       <Title>Lorem, ipsum dolor.</Title>
       <Title theme="dark">Lorem, ipsum dolor.</Title>
+
+      <MyNav />
     </>
   );
 }
