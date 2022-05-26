@@ -1,11 +1,35 @@
-$bgColor: aquamarine;
-$color: blue;
+/* @mixin themeColor($color) {
+  @if ($color == "dark") {
+    background-color: black;
+    color: white;
+  } @else {
+    background-color: #eee;
+    color: black;
+  }
+}
+
 $myPadding: 20px;
+$myMargin: 20px;
 
 .myDiv {
+  margin: $myMargin;
   padding: $myPadding;
-  background-color: $bgColor;
-  .p-test {
-    color: $color;
-  }
+  @include themeColor("dark");
+} */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.todo-list {
+  margin: 0;
+  padding: 0;
+}
+
+.todo {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
 }
