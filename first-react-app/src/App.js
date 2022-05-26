@@ -4,6 +4,8 @@ import styles from "./App.module.css";
 import { Title } from "./Title";
 import MyNav from "./MyNav";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import MyNav2 from "./MyNav2";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
       <Title theme="dark">Lorem, ipsum dolor.</Title>
 
       <MyNav />
+
+      <MyNav2 />
     </>
   );
 }
