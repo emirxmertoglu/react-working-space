@@ -1,0 +1,11 @@
+$bgColor: aquamarine;
+$color: blue;
+$myPadding: 20px;
+
+.myDiv {
+  padding: $myPadding;
+  background-color: $bgColor;
+  .p-test {
+    color: $color;
+  }
+}

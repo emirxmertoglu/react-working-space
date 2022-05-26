@@ -6,6 +6,7 @@ import MyNav from "./MyNav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import MyNav2 from "./MyNav2";
+import "./styles.scss";
 
 function App() {
   return (
@@ -29,6 +30,17 @@ function App() {
       <MyNav />
 
       <MyNav2 />
+
+      <h1 className="text-3xl font-bold">Hello world!</h1>
+
+      <div className="myDiv">
+        <p className="p-test">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus
+          laborum nisi mollitia. Distinctio, veniam. Officiis fuga, dignissimos
+          dicta dolore hic labore! Dolorum provident alias explicabo tempora
+          sit, aliquam sunt ipsum?
+        </p>
+      </div>
     </>
   );
 }
