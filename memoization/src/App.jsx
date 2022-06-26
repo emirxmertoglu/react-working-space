@@ -1,41 +1,50 @@
-import { useReducer } from "react";
+import { useReducer, useState, useCallback } from "react";
 import todoReducer from "./reducers/todoReducer";
+import Header from "./components/Header";
+import AddTodo from "./components/AddTodo";
+import Todos from "./components/Todos";
 
 function App() {
+  console.log("APP rendered");
+
+  const [count, setCount] = useState(0);
+
   const [state, dispatch] = useReducer(todoReducer, {
     todos: [],
     todo: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     dispatch({
       type: "SET_TODO",
       value: e.target.value,
     });
-  };
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({
-      type: "ADD_TODO",
-      todo: state.todo,
-    });
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch({
+        type: "ADD_TODO",
+        todo: state.todo,
+      });
+    },
+    [state.todo]
+  );
 
   return (
     <>
+      <Header />
+      <h3>{count}</h3>
+      <button onClick={() => setCount((count) => count + 1)}>Increase</button>
+      <hr />
       <h1>Todo App</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={state.todo} onChange={handleChange} />
-        <button disabled={!state.todo} type="submit">
-          Add Todo
-        </button>
-      </form>
-      <ul>
-        {state.todos.map((todo, index) => (
-          <li key={index}>{todo}</li>
-        ))}
-      </ul>
+      <AddTodo
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        todo={state.todo}
+      />
+      <Todos todos={state.todos} />
     </>
   );
 }
