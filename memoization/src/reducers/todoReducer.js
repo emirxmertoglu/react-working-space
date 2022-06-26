@@ -11,6 +11,11 @@ function todoReducer(state, action) {
         todos: [...state.todos, action.todo],
         todo: "",
       };
+    case "SET_SEARCH":
+      return {
+        ...state,
+        search: action.value,
+      };
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }
