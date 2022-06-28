@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function App() {
   const [name, setName] = useState("emir");
@@ -52,6 +52,37 @@ function App() {
     );
   };
   const enabled = rules.every((rule) => rule.checked);
+
+  const levels = [
+    { key: "beginner", value: "Beginner" },
+    { key: "jr_developer", value: "Jr. Developer" },
+    { key: "sr_developer", value: "Sr. Developer" },
+  ];
+  const [level, setLevel] = useState("");
+  const selectedLevel = levels.find((lvl) => lvl.key === level);
+
+  const [avatar, setAvatar] = useState(false);
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    if (avatar) {
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", function () {
+        setImage(this.result);
+      });
+      fileReader.readAsDataURL(avatar);
+    }
+  }, [avatar]);
+
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("avatar", avatar);
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      mode: "no-cors",
+      body: formData,
+    });
+  };
 
   return (
     <>
@@ -133,6 +164,45 @@ function App() {
       <br />
       <button disabled={!enabled}>Continue</button>
       <pre>{JSON.stringify(rules, null, 2)}</pre>
+
+      <hr />
+
+      {levels.map((lvl) => (
+        <label key={lvl.key}>
+          <input
+            type="radio"
+            value={lvl.key}
+            checked={lvl.key === level}
+            onChange={(e) => setLevel(e.target.value)}
+          />
+          {lvl.value}
+        </label>
+      ))}
+      <br />
+      {JSON.stringify(selectedLevel, null, 2)}
+
+      <hr />
+
+      <label>
+        Choose an avatar <br />
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={(e) => setAvatar(e.target.files[0])}
+        />
+      </label>
+      {avatar && (
+        <>
+          <h3>{avatar.name}</h3>
+          {image && <img src={image} alt="avatar" width="300px" />}
+        </>
+      )}
+
+      <hr />
+
+      <button disabled={!image} onClick={handleSubmit}>
+        POST request with name and avatar
+      </button>
     </>
   );
 }
