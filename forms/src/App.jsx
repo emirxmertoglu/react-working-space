@@ -2,14 +2,14 @@ import { useMemo, useState } from "react";
 
 function App() {
   const [name, setName] = useState("emir");
+
   const [description, setDescription] = useState("");
+
   const [gender, setGender] = useState("");
   // const genders = ["Male", "Female"];
-
   // const selectedGender = useMemo(() => {
   //   return genders[gender];
   // }, [gender]);
-
   // const selectedGender = genders?.[gender];
   const genders = [
     {
@@ -33,6 +33,25 @@ function App() {
   const selectedCategories =
     categories &&
     categoryList.filter((category) => categories.includes(category.key));
+
+  const [rule, setRule] = useState(true);
+
+  const [rules, setRules] = useState([
+    { key: 1, value: "I agree to the rule 1", checked: false },
+    { key: 2, value: "I agree to the rule 2", checked: false },
+    { key: 3, value: "I agree to the rule 3", checked: true },
+  ]);
+  const checkRule = (key, checked) => {
+    setRules((rules) =>
+      rules.map((rule) => {
+        if (rule.key === key) {
+          rule.checked = checked;
+        }
+        return rule;
+      })
+    );
+  };
+  const enabled = rules.every((rule) => rule.checked);
 
   return (
     <>
@@ -85,6 +104,35 @@ function App() {
         ))}
       </select>
       <pre>{JSON.stringify(selectedCategories, null, 2)}</pre>
+
+      <hr />
+
+      <label>
+        <input
+          type="checkbox"
+          checked={rule}
+          onChange={(e) => setRule(e.target.checked)}
+        />
+        I agree to the terms and conditions
+      </label>
+      <br />
+      <button disabled={!rule}>Continue</button>
+
+      <hr />
+
+      {rules.map((rule) => (
+        <label key={rule.key}>
+          <input
+            type="checkbox"
+            checked={rule.checked}
+            onChange={(e) => checkRule(rule.key, e.target.checked)}
+          />
+          {rule.value}
+        </label>
+      ))}
+      <br />
+      <button disabled={!enabled}>Continue</button>
+      <pre>{JSON.stringify(rules, null, 2)}</pre>
     </>
   );
 }
