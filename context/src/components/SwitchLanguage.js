@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import SiteContext from "../context/SiteContext";
+import { useSite } from "../context/SiteContext";
 
 export default function SwitchLanguage() {
-  const { language, setLanguage } = useContext(SiteContext);
+  const { language, setLanguage } = useSite();
 
   return (
     <>
