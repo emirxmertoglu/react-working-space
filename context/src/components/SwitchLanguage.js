@@ -1,14 +1,18 @@
 import { useSite } from "../context";
 
 export default function SwitchLanguage() {
-  const { language, setLanguage } = useSite();
+  const { language, dispatch } = useSite();
+
+  const toggleLanguage = () => {
+    dispatch({
+      type: "TOGGLE_LANGUAGE",
+    });
+  };
 
   return (
     <>
       <div>Active language {language}</div>
-      <button onClick={() => setLanguage(language === "en" ? "tr" : "en")}>
-        Change language
-      </button>
+      <button onClick={toggleLanguage}>Change language</button>
     </>
   );
 }

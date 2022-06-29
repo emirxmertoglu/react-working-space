@@ -3,17 +3,22 @@ import SwitchTheme from "./SwitchTheme";
 import { useAuth } from "../context";
 
 export default function Header() {
-  const { user, setUser } = useAuth();
+  const { user, dispatch } = useAuth();
 
   const logIn = () => {
-    setUser({
-      id: 1,
-      name: "emir",
+    dispatch({
+      type: "LOGIN",
+      payload: {
+        id: 1,
+        name: "emir",
+      },
     });
   };
 
   const logOut = () => {
-    setUser(false);
+    dispatch({
+      type: "LOGOUT",
+    });
   };
 
   return (
