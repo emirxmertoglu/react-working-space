@@ -1,4 +1,4 @@
-import { useSite } from "../context/SiteContext";
+import { useSite } from "../context";
 
 export default function SwitchLanguage() {
   const { language, setLanguage } = useSite();
