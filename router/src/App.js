@@ -1,19 +1,46 @@
-import { useEffect } from "react";
-import { PostService, UserService } from "./services";
+import { Routes, Route, Link, NavLink } from "react-router-dom";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import BlogLayout from "./pages/blog";
+import Blog from "./pages/blog/Blog";
+import Categories from "./pages/blog/Categories";
+import Post from "./pages/blog/Post";
+import Blog404 from "./pages/blog/Blog404";
+import Page404 from "./pages/Page404";
 
 function App() {
-  useEffect(() => {
-    PostService.getPosts().then((res) => console.log(res));
-    PostService.getPostDetail(3).then((res) => console.log(res));
-    PostService.newPost({
-      userId: 666,
-      title: "Post Title",
-      body: "Post description",
-    }).then((res) => console.log(res));
-    UserService.getUsers().then((res) => console.log(res));
-  }, []);
+  return (
+    <>
+      <nav>
+        <NavLink to="/" className={({ isActive }) => isActive && "active"}>
+          Home
+        </NavLink>
+        <NavLink
+          to="/contact"
+          style={({ isActive }) => ({
+            backgroundColor: isActive ? "crimson" : "transparent",
+          })}
+        >
+          Contact
+        </NavLink>
+        <NavLink to="/blog">
+          {({ isActive }) => <>Blog {isActive && "(Active)"}</>}
+        </NavLink>
+      </nav>
 
-  return <>App</>;
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<BlogLayout />}>
+          <Route index={true} element={<Blog />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="post/:url" element={<Post />} />
+          <Route path="*" element={<Blog404 />} />
+        </Route>
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
