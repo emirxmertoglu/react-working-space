@@ -1,3 +1,12 @@
 .active {
   background-color: yellow;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:not(:last-child) {
+  margin-right: 10px;
+}
