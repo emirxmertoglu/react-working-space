@@ -26,19 +26,18 @@ function App() {
             <Route path="post/:url" element={<Post />} />
             <Route path="*" element={<Blog404 />} />
           </Route>
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
         </Route>
-
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
         </Route>
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </>
