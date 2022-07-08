@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 export default function Blog() {
   return (
     <div>
-      <h3>Blog page</h3>
+      <h2>Blog page</h2>
       <Outlet />
     </div>
   );

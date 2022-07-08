@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { url } from "../../utils";
+import { Helmet } from "react-helmet";
 
 export default function Blog() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +35,10 @@ export default function Blog() {
 
   return (
     <>
+      <Helmet>
+        <meta name="author" content="Emir Mertoglu" />
+        <title>Blog</title>
+      </Helmet>
       <input
         defaultValue={search}
         onChange={(e) => setSearch(e.target.value)}

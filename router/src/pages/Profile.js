@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Helmet } from "react-helmet";
 
 export default function Profile() {
   const { user, setUser } = useAuth();
@@ -10,7 +11,12 @@ export default function Profile() {
 
   return (
     <>
-      <h1>Profile page</h1>
+      <Helmet>
+        <meta name="author" content="Emir Mertoglu" />
+        <title>Profile</title>
+      </Helmet>
+
+      <h2>Profile page</h2>
       {!user && (
         <Link
           to="/auth/login"
