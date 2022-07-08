@@ -1,4 +1,3 @@
-import { Routes, Route } from "react-router-dom";
 import Categories from "./pages/blog/Categories";
 import Post from "./pages/blog/Post";
 import Contact from "./pages/Contact";
@@ -29,6 +28,7 @@ const routes = [
       {
         path: "blog",
         element: <BlogLayout />,
+        auth: true,
         children: [
           {
             index: true,
@@ -50,11 +50,8 @@ const routes = [
       },
       {
         path: "profile",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
+        element: <Profile />,
+        auth: true,
       },
     ],
   },
@@ -74,4 +71,17 @@ const routes = [
   },
 ];
 
-export default routes;
+const authMap = (routes) =>
+  routes.map((route) => {
+    if (route?.auth) {
+      route.element = <PrivateRoute>{route.element}</PrivateRoute>;
+    }
+
+    if (route?.children) {
+      route.children = authMap(route.children);
+    }
+
+    return route;
+  });
+
+export default authMap(routes);
