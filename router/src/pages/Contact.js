@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Formik, Form, Field } from "formik";
+import { Input, File } from "../components/form";
 
 export default function Contact() {
   return (
@@ -15,15 +16,16 @@ export default function Contact() {
         initialValues={{
           name: "emir",
           about: "",
+          accept: false,
           gender: 1,
           skills: ["react", "js"],
-          accept: false,
+          avatar: "",
         }}
         onSubmit={(values) => console.log(values)}
       >
         {({ values }) => (
           <Form>
-            <Field name="name" />
+            <Input label="Name Surname" name="name" />
             <br />
             <Field name="about" component="textarea" />
             <br />
@@ -38,6 +40,8 @@ export default function Contact() {
               <option value="css">CSS</option>
               <option value="html">HTML</option>
             </Field>
+            <br />
+            <File label="Avatar" name="avatar" />
             <br />
             <label>
               <Field name="accept" type="checkbox" />
