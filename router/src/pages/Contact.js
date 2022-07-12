@@ -24,7 +24,7 @@ export default function Contact() {
         onSubmit={(values) => console.log(values)}
       >
         {({ values }) => (
-          <Form>
+          <Form className="p-6">
             <Input label="Name Surname" name="name" />
             <br />
             <Field name="about" component="textarea" />
