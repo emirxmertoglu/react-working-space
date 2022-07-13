@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Formik, Form, Field } from "formik";
-import { Input, File, Checkbox } from "../components/form";
+import { Input, File, Checkbox, Textarea } from "../components/form";
 
 export default function Contact() {
   return (
@@ -14,8 +14,8 @@ export default function Contact() {
 
       <Formik
         initialValues={{
-          name: "emir",
-          about: "",
+          name: "Emir Mertoglu",
+          about: "Sample description..",
           accept: false,
           gender: 1,
           skills: ["react", "js"],
@@ -27,7 +27,7 @@ export default function Contact() {
           <Form className="p-6">
             <Input label="Name Surname" name="name" />
             <br />
-            <Field name="about" component="textarea" />
+            <Textarea label="About" name="about" rows="6" />
             <br />
             <Field name="gender" component="select">
               <option value={1}>Male</option>
