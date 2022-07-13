@@ -1,6 +1,13 @@
 import { Helmet } from "react-helmet";
 import { Formik, Form, Field } from "formik";
-import { Input, File, Checkbox, Textarea, Select } from "../components/form";
+import {
+  Input,
+  File,
+  Checkbox,
+  Textarea,
+  Select,
+  Radio,
+} from "../components/form";
 
 export default function Contact() {
   return (
@@ -10,7 +17,7 @@ export default function Contact() {
         <title>Contact</title>
       </Helmet>
 
-      <h2>Contact page</h2>
+      <h2 className="text-3xl text-center font-medium">Contact page</h2>
 
       <Formik
         initialValues={{
@@ -20,15 +27,14 @@ export default function Contact() {
           gender: 2,
           skills: ["react", "js"],
           avatar: "",
+          title: "jr",
         }}
         onSubmit={(values) => console.log(values)}
       >
         {({ values }) => (
-          <Form className="p-6">
+          <Form className="p-6 m-4 grid gap-y-4 border rounded shadow-lg">
             <Input label="Name Surname" name="name" />
-            <br />
             <Textarea label="About" name="about" rows="6" />
-            <br />
             <Select
               label="Gender"
               name="gender"
@@ -38,7 +44,6 @@ export default function Contact() {
               ]}
               getOriginal={true}
             />
-            <br />
             <Select
               label="Skills"
               name="skills"
@@ -51,23 +56,23 @@ export default function Contact() {
               getOriginal={true}
               multiple={true}
             />
-            <br />
-            {/* <Field name="skills" component="select" multiple={true}>
-              <option value="react">React</option>
-              <option value="js">JavaScript</option>
-              <option value="css">CSS</option>
-              <option value="html">HTML</option>
-            </Field>
-            <br /> */}
+            <Radio
+              label="Select Your Title"
+              name="title"
+              options={[
+                { key: "jr", value: "Jr. Developer" },
+                { key: "sr", value: "Sr. Developer" },
+                { key: "ninja", value: "Ninja Developer" },
+              ]}
+            />
             <File label="Avatar" name="avatar" />
-            <br />
             <Checkbox label="Agree and continue" name="accept" />
-            <br />
-            <button disabled={!values.accept} type="submit">
+            <button
+              className="h-10 px-5 rounded text-sm bg-black text-white"
+              type="submit"
+            >
               Submit
             </button>
-            <br />
-            <pre>{JSON.stringify(values, null, 2)}</pre>
           </Form>
         )}
       </Formik>
