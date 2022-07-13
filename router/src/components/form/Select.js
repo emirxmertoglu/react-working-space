@@ -1,4 +1,5 @@
 import { useField } from "formik";
+import classNames from "classnames";
 
 export default function Input({
   label,
@@ -23,7 +24,10 @@ export default function Input({
     <label className="block w-full">
       <div className="text-sm text-gray-600 mb-1.5">{label}</div>
       <select
-        className="w-full h-30 border-b outline-none focus:border-black"
+        className={classNames({
+          "w-full border-b outline-none focus:border-black": true,
+          "h-10": !props.multiple,
+        })}
         defaultValue={field.value}
         onChange={handleChange}
         {...props}
