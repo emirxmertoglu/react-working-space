@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Formik, Form, Field } from "formik";
-import { Input, File, Checkbox, Textarea } from "../components/form";
+import { Input, File, Checkbox, Textarea, Select } from "../components/form";
 
 export default function Contact() {
   return (
@@ -17,7 +17,7 @@ export default function Contact() {
           name: "Emir Mertoglu",
           about: "Sample description..",
           accept: false,
-          gender: 1,
+          gender: 2,
           skills: ["react", "js"],
           avatar: "",
         }}
@@ -29,18 +29,36 @@ export default function Contact() {
             <br />
             <Textarea label="About" name="about" rows="6" />
             <br />
-            <Field name="gender" component="select">
-              <option value={1}>Male</option>
-              <option value={2}>Female</option>
-            </Field>
+            <Select
+              label="Gender"
+              name="gender"
+              options={[
+                { key: 1, value: "Female" },
+                { key: 2, value: "Male" },
+              ]}
+              getOriginal={true}
+            />
             <br />
-            <Field name="skills" component="select" multiple={true}>
+            <Select
+              label="Skills"
+              name="skills"
+              options={[
+                { key: "react", value: "React" },
+                { key: "js", value: "JavaScript" },
+                { key: "css", value: "CSS" },
+                { key: "html", value: "HTML" },
+              ]}
+              getOriginal={true}
+              multiple={true}
+            />
+            <br />
+            {/* <Field name="skills" component="select" multiple={true}>
               <option value="react">React</option>
               <option value="js">JavaScript</option>
               <option value="css">CSS</option>
               <option value="html">HTML</option>
             </Field>
-            <br />
+            <br /> */}
             <File label="Avatar" name="avatar" />
             <br />
             <Checkbox label="Agree and continue" name="accept" />
