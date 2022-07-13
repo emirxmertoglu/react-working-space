@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Formik, Form, Field } from "formik";
-import { Input, File } from "../components/form";
+import { Input, File, Checkbox } from "../components/form";
 
 export default function Contact() {
   return (
@@ -43,14 +43,13 @@ export default function Contact() {
             <br />
             <File label="Avatar" name="avatar" />
             <br />
-            <label>
-              <Field name="accept" type="checkbox" />
-              Agree and continue
-            </label>
+            <Checkbox label="Agree and continue" name="accept" />
             <br />
             <button disabled={!values.accept} type="submit">
               Submit
             </button>
+            <br />
+            <pre>{JSON.stringify(values, null, 2)}</pre>
           </Form>
         )}
       </Formik>
