@@ -16,7 +16,7 @@ export default function Profile() {
         <title>Profile</title>
       </Helmet>
 
-      <h2>Profile page</h2>
+      <h2 className="text-3xl text-center font-medium">Profile page</h2>
       {!user && (
         <Link
           to="/auth/login"
@@ -29,7 +29,14 @@ export default function Profile() {
           LogIn
         </Link>
       )}
-      {user && <button onClick={handleLogout}>LogOut</button>}
+      {user && (
+        <button
+          onClick={handleLogout}
+          className="px-4 py-2 block mx-auto mt-4 bg-red-500 rounded text-white text-sm font-medium"
+        >
+          LogOut
+        </button>
+      )}
     </>
   );
 }

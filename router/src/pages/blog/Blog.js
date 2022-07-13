@@ -45,12 +45,13 @@ export default function Blog() {
       />
       <ul>
         {posts.map((post) => (
-          <li key={post.id}>
+          <li key={post.id} className="mb-2 last:mb-0">
             <Link
               to={url("home.blog.post", {
                 id: post.id,
                 url: post.url,
               })}
+              className="text-lg font-medium underline underline-offset-4 shadow-lg"
             >
               {post.title}
             </Link>

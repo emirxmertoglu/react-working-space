@@ -8,7 +8,7 @@ export default function Home() {
         <title>Home</title>
       </Helmet>
 
-      <h2>Home page</h2>
+      <h2 className="text-3xl text-center font-medium">Home page</h2>
     </>
   );
 }
