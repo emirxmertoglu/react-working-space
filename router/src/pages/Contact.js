@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, useFormikContext } from "formik";
 import {
   Input,
   File,
@@ -8,6 +8,18 @@ import {
   Select,
   Radio,
 } from "../components/form";
+import { useEffect } from "react";
+import { ContactSchema, SampleSchema } from "../validations";
+
+const AutoSubmitCode = () => {
+  const { values, submitForm } = useFormikContext();
+  useEffect(() => {
+    if (values.code.length === 6) {
+      submitForm();
+    }
+  }, [values, submitForm]);
+  return null;
+};
 
 export default function Contact() {
   return (
@@ -20,16 +32,34 @@ export default function Contact() {
       <h2 className="text-3xl text-center font-medium">Contact page</h2>
 
       <Formik
+        initialValues={{ code: "" }}
+        onSubmit={(values) => console.log(values)}
+        validationSchema={SampleSchema}
+      >
+        <Form className="hidden">
+          <Input label="Enter The Code" name="code" />
+          <button
+            type="submit"
+            className="p-2 mt-2 rounded bg-green-500 text-white"
+          >
+            Submit
+          </button>
+          <AutoSubmitCode />
+        </Form>
+      </Formik>
+
+      <Formik
         initialValues={{
-          name: "Emir Mertoglu",
-          about: "Sample description..",
+          name: "",
+          about: "",
           accept: false,
-          gender: 2,
-          skills: ["react", "js"],
+          gender: 1,
+          skills: [],
           avatar: "",
           title: "jr",
         }}
         onSubmit={(values) => console.log(values)}
+        validationSchema={ContactSchema}
       >
         {({ values }) => (
           <Form className="p-6 m-4 grid gap-y-4 border rounded shadow-lg">
@@ -70,6 +100,7 @@ export default function Contact() {
             <button
               className="h-10 px-5 rounded text-sm bg-black text-white"
               type="submit"
+              disabled={!values.accept}
             >
               Submit
             </button>

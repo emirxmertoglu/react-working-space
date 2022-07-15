@@ -14,6 +14,7 @@ export default function Checkbox({ label, options, ...props }) {
           key={key}
         >
           <button
+            type="button"
             onClick={() => helpers.setValue(option.key)}
             className={classNames({
               "w-5 h-5 flex items-center justify-center border rounded-full transition-all": true,
