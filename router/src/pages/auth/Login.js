@@ -1,7 +1,9 @@
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
+import { Input } from "../../components/form";
+import { LoginSchema } from "../../validations";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,24 +18,31 @@ export default function Login() {
         <title>Login</title>
       </Helmet>
 
-      <h2>Login Page</h2>
+      <h2 className="text-3xl text-center font-medium mb-3">Login page</h2>
 
       <Formik
         initialValues={{ username: "", password: "" }}
         onSubmit={(values) => {
-          setUser(values);
-          navigate(location?.state?.return_url || "/", {
-            replace: true,
-          });
+          setTimeout(() => {
+            setUser(values);
+            navigate(location?.state?.return_url || "/", {
+              replace: true,
+            });
+          }, 1250);
         }}
+        validationSchema={LoginSchema}
       >
-        {() => (
-          <Form>
-            <Field name="username" placeholder="username" />
-            <br />
-            <Field name="password" type="password" placeholder="password" />
-            <br />
-            <button type="submit">LogIn</button>
+        {({ values, isSubmitting }) => (
+          <Form className="grid gap-y-3 p-4">
+            <Input label="Username" name="username" />
+            <Input label="Password" name="password" type="password" />
+            <button
+              disabled={isSubmitting}
+              type="submit"
+              className="bg-black text-sm text-white rounded h-10 disabled:opacity-40"
+            >
+              LogIn
+            </button>
           </Form>
         )}
       </Formik>
