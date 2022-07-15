@@ -56,12 +56,18 @@ export default function Contact() {
           gender: "",
           skills: [],
           avatar: "",
-          title: "jr",
+          title: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            console.log(values);
+            actions.setSubmitting(false);
+            alert(`Thanks ${values.name}, for your interest.`);
+          }, 250);
+        }}
         validationSchema={ContactSchema}
       >
-        {({ values }) => (
+        {({ values, isSubmitting }) => (
           <Form className="p-6 m-4 grid gap-y-4 border rounded shadow-lg">
             <Input label="Name Surname" name="name" />
             <Textarea label="About" name="about" rows="6" />
@@ -99,12 +105,12 @@ export default function Contact() {
             <File label="Avatar" name="avatar" />
             <Checkbox label="Agree and continue" name="accept" />
             <button
-              className="h-10 px-5 rounded text-sm bg-black text-white"
+              disabled={isSubmitting}
+              className="h-10 px-5 rounded text-sm bg-black text-white disabled:opacity-40"
               type="submit"
             >
               Submit
             </button>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
           </Form>
         )}
       </Formik>

@@ -28,7 +28,7 @@ export default function Login() {
             navigate(location?.state?.return_url || "/", {
               replace: true,
             });
-          }, 1250);
+          }, 750);
         }}
         validationSchema={LoginSchema}
       >
