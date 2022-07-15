@@ -100,7 +100,6 @@ export default function Contact() {
             <button
               className="h-10 px-5 rounded text-sm bg-black text-white"
               type="submit"
-              disabled={!values.accept}
             >
               Submit
             </button>
