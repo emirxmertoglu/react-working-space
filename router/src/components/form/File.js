@@ -1,8 +1,9 @@
-import { useField } from "formik";
+import { useField, ErrorMessage } from "formik";
 import { FiCheck } from "react-icons/fi";
 
 export default function File({ label, ...props }) {
   const [field, meta, helpers] = useField(props);
+  console.log(meta);
 
   async function fileOpen() {
     try {
@@ -11,6 +12,7 @@ export default function File({ label, ...props }) {
       helpers.setValue(file);
     } catch (error) {
       helpers.setValue("");
+      helpers.setTouched(true);
     }
   }
 
@@ -38,6 +40,11 @@ export default function File({ label, ...props }) {
           Remove the file
         </button>
       )}
+      <ErrorMessage
+        name={field.name}
+        component="small"
+        className="mt-2 block text-xs text-red-600"
+      />
     </div>
   );
 }

@@ -53,7 +53,7 @@ export default function Contact() {
           name: "",
           about: "",
           accept: false,
-          gender: 1,
+          gender: "",
           skills: [],
           avatar: "",
           title: "jr",
@@ -69,10 +69,11 @@ export default function Contact() {
               label="Gender"
               name="gender"
               options={[
+                { key: "", value: "Choose" },
                 { key: 1, value: "Female" },
                 { key: 2, value: "Male" },
               ]}
-              getOriginal={true}
+              getOriginal={false}
             />
             <Select
               label="Skills"
@@ -103,6 +104,7 @@ export default function Contact() {
             >
               Submit
             </button>
+            <pre>{JSON.stringify(values, null, 2)}</pre>
           </Form>
         )}
       </Formik>

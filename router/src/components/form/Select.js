@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { useField, ErrorMessage } from "formik";
 import classNames from "classnames";
 
 export default function Input({
@@ -9,7 +9,7 @@ export default function Input({
 }) {
   const [field, meta, helpers] = useField(props);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     let selected;
     if (props.multiple) {
       const multiple = [...e.target.selectedOptions].map((o) => o.value);
@@ -17,7 +17,11 @@ export default function Input({
     } else {
       selected = options.find((option) => option.key === +e.target.value);
     }
-    helpers.setValue(getOriginal ? selected : +e.target.value);
+    await helpers.setValue(getOriginal ? selected : e.target.value);
+    await helpers.setTouched(true);
+    if (selected) {
+      helpers.setError(undefined);
+    }
   };
 
   return (
@@ -25,8 +29,10 @@ export default function Input({
       <div className="text-sm text-gray-600 mb-1.5">{label}</div>
       <select
         className={classNames({
-          "w-full border-b outline-none focus:border-black": true,
+          "w-full border-b outline-none": true,
           "h-10": !props.multiple,
+          "focus:border-black": !meta.error || !meta.touched,
+          "border-red-600": meta.error && meta.touched,
         })}
         defaultValue={field.value}
         onChange={handleChange}
@@ -38,6 +44,11 @@ export default function Input({
           </option>
         ))}
       </select>
+      <ErrorMessage
+        name={field.name}
+        component="small"
+        className="mt-2 block text-xs text-red-600"
+      />
     </label>
   );
 }
