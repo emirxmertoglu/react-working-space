@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { useField, ErrorMessage } from "formik";
 import classNames from "classnames";
 
 export default function Checkbox({ label, options, ...props }) {
@@ -32,6 +32,11 @@ export default function Checkbox({ label, options, ...props }) {
           {option.value}
         </label>
       ))}
+      <ErrorMessage
+        name={field.name}
+        component="small"
+        className="mt-2 block text-xs text-red-600"
+      />
     </div>
   );
 }

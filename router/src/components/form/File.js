@@ -3,7 +3,6 @@ import { FiCheck } from "react-icons/fi";
 
 export default function File({ label, ...props }) {
   const [field, meta, helpers] = useField(props);
-  console.log(meta);
 
   async function fileOpen() {
     try {
