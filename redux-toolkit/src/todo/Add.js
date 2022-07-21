@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
 
-export default function AddTodo({ setTodos }) {
+export default function AddTodo({ setTodos, user }) {
   const [todo, setTodo] = useState("");
 
   const handleSubmit = (e) => {
@@ -11,7 +11,7 @@ export default function AddTodo({ setTodos }) {
         title: todo,
         done: false,
         id: nanoid(),
-        user: 1, // !todo add the id of logged in user
+        user: user.id,
       },
       ...todos,
     ]);
@@ -26,7 +26,7 @@ export default function AddTodo({ setTodos }) {
         onChange={(e) => setTodo(e.target.value)}
         placeholder="Write a todo"
       />
-      <button disabled={!todo} type="submit">
+      <button disabled={!todo || !user} type="submit">
         Add
       </button>
     </form>
