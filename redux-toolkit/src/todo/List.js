@@ -1,16 +1,13 @@
 import TodoItem from "./Item";
+import { useSelector } from "react-redux";
 
-export default function TodoList({ todos, setTodos, user, setModal }) {
+export default function TodoList({ user, setModal }) {
+  const { todos } = useSelector((state) => state.todo);
+
   return (
     <ul>
       {todos.map((todo, key) => (
-        <TodoItem
-          key={key}
-          todo={todo}
-          setTodos={setTodos}
-          user={user}
-          setModal={setModal}
-        />
+        <TodoItem key={key} todo={todo} user={user} setModal={setModal} />
       ))}
     </ul>
   );
