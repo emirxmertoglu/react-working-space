@@ -1,10 +1,16 @@
-export default function Header({ user, setUser }) {
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "../stores/auth";
+
+export default function Header() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
   const handleLogin = (user) => {
-    setUser(user);
+    dispatch(login(user));
   };
 
   const handleLogout = () => {
-    setUser(false);
+    dispatch(logout());
   };
 
   return (
