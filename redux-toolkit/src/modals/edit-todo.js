@@ -1,24 +1,20 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { editTodo } from "../stores/todo";
+import { handleEdit, handleClose } from "../utils";
 
-export default function EditTodo({ data, close }) {
+export default function EditTodo({ data }) {
   const [todo, setTodo] = useState(data.title);
   const [done, setDone] = useState(false);
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(
-      editTodo({
-        id: data.id,
-        title: todo,
-        done,
-      })
-    );
+    handleEdit({
+      id: data.id,
+      title: todo,
+      done,
+    });
 
-    close();
+    handleClose();
   };
 
   return (
@@ -41,7 +37,6 @@ export default function EditTodo({ data, close }) {
         <br />
         <button type="submit">Save</button>
       </form>
-      <button onClick={close}>Close</button>
     </div>
   );
 }
