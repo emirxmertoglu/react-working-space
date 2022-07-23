@@ -11,12 +11,22 @@ const todos = createSlice({
     addTodo: (state, action) => {
       state.todos = [action.payload, ...state.todos];
     },
+    editTodo: (state, action) => {
+      state.todos = state.todos.map((todo) => {
+        if (todo.id === action.payload.id) {
+          todo.title = action.payload.title;
+          todo.done = action.payload.done;
+        }
+
+        return todo;
+      });
+    },
     deleteTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
   },
 });
 
-export const { addTodo, deleteTodo } = todos.actions;
+export const { addTodo, editTodo, deleteTodo } = todos.actions;
 
 export default todos.reducer;
