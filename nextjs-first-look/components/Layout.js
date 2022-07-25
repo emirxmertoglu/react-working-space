@@ -10,7 +10,7 @@ export default function Layout({ children }) {
               <a>Home</a>
             </Link>
           </li>
-          <li>
+          <li className="item">
             <Link href="/about">
               <a>About</a>
             </Link>
@@ -25,10 +25,19 @@ export default function Layout({ children }) {
           align-items: center;
           justify-content: flex-start;
           list-style: none;
+          margin: 0;
+          background-color: #fff;
         }
 
         .item:not(:last-child) {
           margin-right: 20px;
+        }
+
+        .item a {
+          padding: 20px 0;
+          display: block;
+          font-weight: 500;
+          color: #000;
         }
       `}</style>
     </>
