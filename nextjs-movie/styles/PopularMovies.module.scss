@@ -1,0 +1,31 @@
+.head {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.movie_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 1200px;
+  margin: 0 auto;
+
+  a {
+    position: relative;
+    width: calc(25% - 10px);
+
+    h3 {
+      position: absolute;
+      width: 100%;
+      padding: 50px 20px 20px 20px;
+      background: linear-gradient(to top, #000, transparent);
+      font-size: 20px;
+      bottom: 0;
+      left: 0;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}
